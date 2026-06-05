@@ -7,13 +7,22 @@ class Solution {
 
             if (mat[i][0] <= target && target <= mat[i][n - 1]) {
 
-                for (int j = 0; j < n; j++) {
-                    if (mat[i][j] == target) {
+                int low = 0;
+                int high = n - 1;
+
+                while (low <= high) {
+                    int mid = low + (high - low) / 2;
+
+                    if (mat[i][mid] == target) {
                         return true;
+                    } else if (mat[i][mid] < target) {
+                        low = mid + 1;
+                    } else {
+                        high = mid - 1;
                     }
                 }
 
-                return false; // target should be in this row but isn't
+                return false;
             }
         }
 
