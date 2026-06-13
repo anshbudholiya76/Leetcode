@@ -14,9 +14,6 @@ class Solution {
 
         k = k % n;
 
-        if(k == 0)
-            return head;
-
         tail.next = head;
 
         ListNode newTail = head;
