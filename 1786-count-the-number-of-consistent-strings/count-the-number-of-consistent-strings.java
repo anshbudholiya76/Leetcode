@@ -1,24 +1,30 @@
 class Solution {
     public int countConsistentStrings(String allowed, String[] words) {
-        int c = 0;
-        
-        HashSet<Character> set = new HashSet<>();
-        for(char c1 : allowed.toCharArray()){
-            set.add(c1);
+
+        boolean[] allowedChar = new boolean[26];
+
+        // Mark allowed characters
+        for (char ch : allowed.toCharArray()) {
+            allowedChar[ch - 'a'] = true;
         }
-        for(int i = 0;i<words.length;i++){
-            boolean b = true;
-            String l = words[i];
-            for(int j = 0;j<l.length();j++){
-                char s = l.charAt(j);
-                if(!set.contains(s)){
-                    b = false;
+
+        int count = 0;
+
+        for (String word : words) {
+            boolean valid = true;
+
+            for (char ch : word.toCharArray()) {
+                if (!allowedChar[ch - 'a']) {
+                    valid = false;
+                    break;
                 }
             }
-            if(b == true){
-                c++;
+
+            if (valid) {
+                count++;
             }
         }
-        return c;
+
+        return count;
     }
 }
